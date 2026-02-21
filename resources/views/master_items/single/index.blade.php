@@ -18,6 +18,17 @@
                             <td>{{$data->nama}}</td>
                         </tr>
                         <tr>
+                            <th>Foto</th>
+                            <td>:</td>
+                            <td>
+                                @if($data->foto)
+                                    <img src="{{ asset($data->foto) }}" alt="Foto Item" width="150" style="object-fit: cover;">
+                                @else
+                                    -
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Harga Beli</th>
                             <td>:</td>
                             <td>{{$data->harga_beli}}</td>
@@ -41,6 +52,19 @@
                             <th>Jenis</th>
                             <td>:</td>
                             <td>{{$data->jenis}}</td>
+                        </tr>
+                        <tr>
+                            <th>Kategori</th>
+                            <td>:</td>
+                            <td>
+                                @if($data->categories && $data->categories->count() > 0)
+                                    @foreach($data->categories as $kat)
+                                        <span class="badge bg-secondary me-1">{{ $kat->nama }}</span>
+                                    @endforeach
+                                @else
+                                    -
+                                @endif
+                            </td>
                         </tr>
                     </table>
                     <a class="btn btn-info" href="{{url('master-items/form/edit')}}/{{$data->id}}">Edit</a>

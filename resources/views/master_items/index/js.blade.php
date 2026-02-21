@@ -12,6 +12,9 @@
         $('#table').DataTable({
             searching: false,
             order: [[0, 'desc']],
+            columnDefs: [
+                { targets: [2, 3, 8], render: function(data) { return data; } }
+            ]
         });
         getData()
     });
@@ -47,10 +50,23 @@
 
                     var html = `<a href="{{url('master-items/view/')}}/` + kode + `" class="btn btn-primary">View</a>`
 
-                    $.each(item, function(obj_name, obj_value) {
-                        if (obj_name == 'laba') return false;
-                        array_temp.push(obj_value)
-                    })
+                    array_temp.push(item.kode)
+                    array_temp.push(item.nama)
+                    
+                    var foto_html = item.foto ? `<img src="{{asset('')}}` + item.foto + `" width="50" style="object-fit:cover">` : '-'
+                    array_temp.push(foto_html)
+                    var HTMLkat = '';
+                    if(item.categories && item.categories.length > 0) {
+                        $.each(item.categories, function(k, v) {
+                            HTMLkat += '<span class="badge bg-secondary me-1">' + v.nama + '</span>';
+                        });
+                    } else {
+                        HTMLkat += '-';
+                    }
+                    
+                    array_temp.push(HTMLkat)
+                    array_temp.push(item.jenis)
+                    array_temp.push(item.harga_beli)
                     array_temp.push(harga_jual)
                     array_temp.push(item.supplier)
                     array_temp.push(html)

@@ -31,3 +31,14 @@ Route::get('/master-items/delete/{id}', [App\Http\Controllers\MasterItemsControl
 
 
 Route::get('/master-items/update-random-data', [App\Http\Controllers\MasterItemsController::class, 'updateRandomData']);
+Route::get('/master-items/export', [App\Http\Controllers\MasterItemsExportController::class, 'exportExcel']);
+
+Route::get('/master-categories', [App\Http\Controllers\MasterCategoriesController::class, 'index']);
+Route::get('/master-categories/search', [App\Http\Controllers\MasterCategoriesController::class, 'search']);
+Route::get('/master-categories/form/{method}/{id?}', [App\Http\Controllers\MasterCategoriesController::class, 'formView']);
+Route::post('/master-categories/form/{method}/{id?}', [App\Http\Controllers\MasterCategoriesController::class, 'formSubmit']);
+
+Route::get('/master-categories/view/{id}', [App\Http\Controllers\MasterCategoriesController::class, 'singleView']);
+Route::get('/master-categories/print/{id}', [App\Http\Controllers\MasterCategoriesController::class, 'printPdf']);
+Route::get('/master-categories/delete/{id}', [App\Http\Controllers\MasterCategoriesController::class, 'delete']);
+Route::post('/master-categories/api/store', [App\Http\Controllers\MasterCategoriesController::class, 'apiStore']);
